@@ -9,14 +9,14 @@ The obfuscator library enables Java programs to encode and decode sensitive valu
 ```xml
 <dependency>
     <groupId>rs.in.devlabs</groupId>
-    <artifactId>obfuscator</artifactId>
+    <artifactId>jfuscator</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
 
 ### Gradle
 ```groovy
-implementation 'rs.in.devlabs:obfuscator:1.0.0'
+implementation 'rs.in.devlabs:jfuscator:1.0.0'
 ```
 
 ## Usage Examples
