@@ -12,6 +12,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
+import java.util.regex.Pattern;
 
 /**
  * Obfuscator class enables encoding and decoding sensitive values such as passwords.
@@ -102,7 +103,7 @@ public class Obfuscator {
      * @throws ObfuscatorException if unobfuscation fails
      */
     public String unobfuscate(String obfuscatedText) throws ObfuscatorException {
-        String[] parts = obfuscatedText.split(config.getSeparator());
+        String[] parts = obfuscatedText.split(Pattern.quote(config.getSeparator()));
 
         // The first split might create an empty first element
         int startIndex = parts.length > 0 && parts[0].isEmpty() ? 1 : 0;

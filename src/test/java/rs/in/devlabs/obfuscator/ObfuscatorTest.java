@@ -7,11 +7,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ObfuscatorTest {
+public class ObfuscatorTest {
 
     @Test
     void testBasicObfuscationCycle() throws ObfuscatorException {
@@ -74,7 +75,7 @@ class ObfuscatorTest {
         Obfuscator obfuscator = new Obfuscator(passphrase, config);
 
         String obfuscated = obfuscator.obfuscate("Test text");
-        String[] parts = obfuscated.split(Obfuscator.DEFAULT_SEPARATOR);
+        String[] parts = obfuscated.split(Pattern.quote(Obfuscator.DEFAULT_SEPARATOR));
 
         // Check if we have all parts (might include an empty first part)
         assertTrue(parts.length >= 4, "Expected at least 4 parts in obfuscated string");
@@ -151,7 +152,7 @@ class ObfuscatorTest {
     void testUnsupportedVersion() {
         byte[] passphrase = "testPassphrase123".getBytes(StandardCharsets.UTF_8);
         Obfuscator obfuscator = new Obfuscator(passphrase);
-        String invalidVersionText = "$o2$salt$iv$ciphertext";
+        String invalidVersionText = "$o2$/EOD14hyitcX+8Auy4ZffA==$LwOShHos6FbT/3TI$w6VMob0yZfZ8CDwGwAMNArTvbU8Aj9oihg==";
 
         ObfuscatorException exception = assertThrows(ObfuscatorException.class,
                 () -> obfuscator.unobfuscate(invalidVersionText),
